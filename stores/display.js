@@ -14,6 +14,8 @@ const display = store({
   layout: null,
   statusBar: null,
   widgets: null,
+  orientation: 'landscape',
+  ratio: '16:9',
   async setId(id) {
     if (!id) return
     display.id = id
@@ -53,6 +55,14 @@ const display = store({
 
     display.statusBar = result
     updateDisplayThrottled(display.id, { statusBar: display.statusBar })
+  },
+  setOrientation(orientation) {
+    if (!['landscape', 'portrait'].includes(orientation)) return
+    display.orientation = orientation
+  },
+  setRatio(ratio) {
+    if (!['16:9', '4:3', '9:16', '3:4', '1:1'].includes(ratio)) return
+    display.ratio = ratio
   }
 })
 
