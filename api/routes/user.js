@@ -19,4 +19,15 @@ router.get('/logout', (req, res) => {
   res.redirect('/login')
 })
 
+// 회원가입 API
+router.post('/register', function(req, res) {
+  const { username, password } = req.body;
+  User.register(new User({ username }), password, function(err, user) {
+    if (err) {
+      return res.status(400).json({ success: false, message: err.message });
+    }
+    res.json({ success: true, user });
+  });
+});
+
 module.exports = router

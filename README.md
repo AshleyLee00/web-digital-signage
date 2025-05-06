@@ -135,7 +135,7 @@ export default class MyWidget extends BaseWidget {
 
 The widget's icon should come from `FontAwesome`.
 
-3. Implement two `React` components: `Options` (renders the dialog that will allow the administrator to change the widget’s configuration) and `Widget` (renders the user-facing side widget that will be displayed on the TV), return them from getter functions that you add to your `index.js` file:
+3. Implement two `React` components: `Options` (renders the dialog that will allow the administrator to change the widget's configuration) and `Widget` (renders the user-facing side widget that will be displayed on the TV), return them from getter functions that you add to your `index.js` file:
 
 ```js
 export default class MyWidget extends BaseWidget {
@@ -153,7 +153,7 @@ export default class MyWidget extends BaseWidget {
 }
 ```
 
-4. Finally, when done implementing the widget, register it by adding its folder’s name to the `widgets/widget_list.js​` file
+4. Finally, when done implementing the widget, register it by adding its folder's name to the `widgets/widget_list.js​` file
 
 ```js
 module.exports = ['slideshow', 'weather', 'congrats', 'youtube', 'web',
@@ -161,3 +161,46 @@ module.exports = ['slideshow', 'weather', 'congrats', 'youtube', 'web',
 ```
 
 5. Restart the server to see the new widget appear on the administrator panel
+
+### 계정 생성 및 로그인 안내
+
+#### 1. demo 계정 생성
+
+초기 관리자 계정이 없거나, demo 계정이 필요하다면 아래 주소로 GET 요청을 보내세요:
+
+```
+GET /api/v1/user/demo
+```
+
+예시:
+- http://localhost:3001/api/v1/user/demo
+
+이후 username: `demo`, password: `demo`로 로그인할 수 있습니다.
+
+#### 2. 회원가입(계정 생성) API
+
+웹 UI에서 직접 계정을 만들고 싶다면, 아래 API를 사용할 수 있습니다:
+
+```
+POST /api/v1/user/register
+Content-Type: application/json
+{
+  "username": "원하는아이디",
+  "password": "원하는비밀번호"
+}
+```
+
+이 API를 활용해 회원가입 폼을 만들거나, Postman 등으로 직접 계정을 생성할 수 있습니다.
+
+#### 3. 로그인 API
+
+```
+POST /api/v1/user/login
+Content-Type: application/json
+{
+  "username": "아이디",
+  "password": "비밀번호"
+}
+```
+
+성공 시 `{ success: true }`를 반환합니다.
